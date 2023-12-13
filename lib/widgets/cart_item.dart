@@ -32,20 +32,19 @@ class CartItem extends StatelessWidget {
         return showDialog(
             context: context,
             builder: (context) => AlertDialog(
-                  title: Text('Are you sure?'),
-                  content:
-                      Text('Do you want to remove the item from the cart?'),
+                  title: Text('Esti sigur?'),
+                  content: Text('Vrei sa stergi acest produs din cos?'),
                   actions: [
                     TextButton(
                         onPressed: () {
                           Navigator.of(context).pop(false);
                         },
-                        child: Text('No')),
+                        child: Text('Nu')),
                     TextButton(
                         onPressed: () {
                           Navigator.of(context).pop(true);
                         },
-                        child: Text('Yes'))
+                        child: Text('Da'))
                   ],
                 ));
       },
@@ -64,7 +63,7 @@ class CartItem extends StatelessWidget {
                     padding: EdgeInsets.all(4),
                     child: FittedBox(child: Text('\$${price}')))),
             title: Text(title),
-            subtitle: Text('Total: \$${(price * quantity)}'),
+            subtitle: Text('Total: ${(price * quantity)} RON'),
             trailing: Text('x $quantity'),
           ),
         ),

@@ -58,7 +58,7 @@ class AuthScreen extends StatelessWidget {
                         ],
                       ),
                       child: Text(
-                        'MSA Flutter',
+                        'Magazin Engross',
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
                           fontSize: 30,
@@ -130,7 +130,7 @@ class _AuthenticationCardState extends State<AuthenticationCard>
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text('An Error Occurred!'),
+              title: Text('A aparut o eroare! Incearca din nou!'),
               content: Text(message),
               actions: [
                 TextButton(
@@ -161,27 +161,28 @@ class _AuthenticationCardState extends State<AuthenticationCard>
             _authData['email'] as String, _authData['password'] as String);
       }
     } on HttpException catch (error) {
-      var errorMessage = 'Authentication failed';
+      var errorMessage = 'Autentificarea nu a avut succes';
 
       if (error.toString().contains('EMAIL_EXISTS')) {
-        errorMessage = 'This email address is already in use.';
+        errorMessage = 'Adresa de email este deja folosita';
       } else if (error.toString().contains('INVALID_LOGIN_CREDENTIALS')) {
-        errorMessage = 'Invalid login credentials';
+        errorMessage = 'Date de logare incorecte';
       } else if (error.toString().contains('WEAK_PASSWORD')) {
-        errorMessage = 'This password is too weak. Try adding more characters.';
+        errorMessage = 'Parola este prea slaba. Incearca mai multe caractere.';
       } else if (error.toString().contains('EMAIL_NOT_FOUND')) {
-        errorMessage = 'Could not find a user with that email address.';
+        errorMessage =
+            'Nu exista niciun utilizator cu adresa de email adaugata.';
       } else if (error.toString().contains('INVALID_PASSWORD')) {
-        errorMessage = 'Invalid password';
+        errorMessage = 'Parola incorecta';
       } else if (error.toString().contains('TOO_MANY_ATTEMPTS_TRY_LATER')) {
         errorMessage =
-            'Access to this account has been temporarily disabled due to many failed login attempts.' +
-                'You can immediately restore it by resetting your password or you can try again later.';
+            'Accesul la acest cont este temporar inchis datorita multiplelor incercari esuate.' +
+                'Incearca mai tarziu.';
       }
 
       _showErrorDialog(errorMessage);
     } catch (error) {
-      var errorMessage = 'Authentication failed';
+      var errorMessage = 'Autentificarea nu a avut succes';
       _showErrorDialog(errorMessage);
     }
 
@@ -233,7 +234,7 @@ class _AuthenticationCardState extends State<AuthenticationCard>
                     // ignore: body_might_complete_normally_nullable
                     validator: (value) {
                       if (value!.isEmpty || !value.contains('@')) {
-                        return 'Invalid email!';
+                        return 'Email invalid';
                       }
                     },
                     onSaved: (value) {
@@ -241,13 +242,13 @@ class _AuthenticationCardState extends State<AuthenticationCard>
                     },
                   ),
                   TextFormField(
-                    decoration: InputDecoration(labelText: 'Password'),
+                    decoration: InputDecoration(labelText: 'Parola'),
                     obscureText: true,
                     controller: _passwordController,
                     // ignore: body_might_complete_normally_nullable
                     validator: (value) {
                       if (value!.isEmpty || value.length < 5) {
-                        return 'Password is too short!';
+                        return 'Parola este prea scurta';
                       }
                     },
                     onSaved: (value) {
@@ -274,14 +275,14 @@ class _AuthenticationCardState extends State<AuthenticationCard>
                           enabled:
                               _authenticationMode == AuthenticationMode.SignUp,
                           decoration:
-                              InputDecoration(labelText: 'Confirm Password'),
+                              InputDecoration(labelText: 'Confirma parola'),
                           obscureText: true,
                           validator: _authenticationMode ==
                                   AuthenticationMode.SignUp
                               // ignore: body_might_complete_normally_nullable
                               ? (value) {
                                   if (value != _passwordController.text) {
-                                    return 'Passwords do not match!';
+                                    return 'Parolele nu se potrivesc';
                                   }
                                 }
                               : null,
@@ -298,8 +299,8 @@ class _AuthenticationCardState extends State<AuthenticationCard>
                     ElevatedButton(
                       child: Text(
                           _authenticationMode == AuthenticationMode.Login
-                              ? 'LOGIN'
-                              : 'SIGN UP'),
+                              ? 'AUTENTIFICARE'
+                              : 'INREGISTRARE'),
                       onPressed: _submit,
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
@@ -312,7 +313,7 @@ class _AuthenticationCardState extends State<AuthenticationCard>
                     ),
                   TextButton(
                     child: Text(
-                        '${_authenticationMode == AuthenticationMode.Login ? 'SIGNUP' : 'LOGIN'} INSTEAD'),
+                        '${_authenticationMode == AuthenticationMode.Login ? 'N-ai cont? Inregistreaza-te' : 'Ai cont? Logheaza-te'}'),
                     onPressed: _switchAuthenticationMode,
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.symmetric(

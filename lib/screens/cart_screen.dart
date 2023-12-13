@@ -15,7 +15,7 @@ class CartScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Cart'),
+        title: const Text('Cosul tau'),
       ),
       body: Column(children: [
         Card(
@@ -26,13 +26,13 @@ class CartScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Total value',
+                    'Valoare totala',
                     style: TextStyle(fontSize: 17),
                   ),
                   Spacer(),
                   Chip(
                     label: Text(
-                      '\$${cart.totalValue.toStringAsFixed(2)}',
+                      '${cart.totalValue.toStringAsFixed(2)} RON',
                       style: TextStyle(
                           color: Theme.of(context)
                               .primaryTextTheme
@@ -98,7 +98,7 @@ class _OrderButtonState extends State<OrderButton> {
       child: _isLoading
           ? CircularProgressIndicator()
           : Text(
-              'ORDER HERE',
+              'COMANDA ACUM',
             ),
       style: TextButton.styleFrom(
         foregroundColor: Theme.of(context).primaryColor,

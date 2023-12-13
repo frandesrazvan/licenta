@@ -94,7 +94,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
         await showDialog(
             context: context,
             builder: (context) => AlertDialog(
-                  title: Text('Something went wrong!'),
+                  title: Text('Eroare!'),
                   content: Text(error.toString()),
                   actions: [
                     TextButton(
@@ -116,7 +116,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Product'),
+        title: Text('Editeaza produs'),
         actions: [IconButton(onPressed: _saveForm, icon: Icon(Icons.save))],
       ),
       body: _isLoading
@@ -131,11 +131,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     children: [
                       TextFormField(
                         initialValue: _initValues['title'],
-                        decoration: InputDecoration(labelText: 'Title'),
+                        decoration: InputDecoration(labelText: 'Titlu'),
                         textInputAction: TextInputAction.next,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter a title.';
+                            return 'Adauga un titlu.';
                           }
                           return null;
                         },
@@ -151,18 +151,18 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       ),
                       TextFormField(
                         initialValue: _initValues['price'],
-                        decoration: InputDecoration(labelText: 'Price'),
+                        decoration: InputDecoration(labelText: 'Pret'),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter a price.';
+                            return 'Adauga un pret.';
                           }
                           if (double.tryParse(value) == null) {
-                            return 'Please enter a valid number';
+                            return 'Adauga un numar valid.';
                           }
                           if (double.parse(value) <= 0) {
-                            return 'Please enter a number greater than zero.';
+                            return 'Adauga un numar mai mare decat zero';
                           }
                           return null;
                         },
@@ -178,15 +178,15 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       ),
                       TextFormField(
                         initialValue: _initValues['description'],
-                        decoration: InputDecoration(labelText: 'Description'),
+                        decoration: InputDecoration(labelText: 'Descriere'),
                         maxLines: 3,
                         keyboardType: TextInputType.multiline,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter a description';
+                            return 'Adauga descriere.';
                           }
                           if (value.length < 10) {
-                            return 'Should be at least 10 characters long.';
+                            return 'Descrierea trebuie sa contina minim 10 caractere.';
                           }
                           return null;
                         },
@@ -211,7 +211,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 border:
                                     Border.all(width: 1, color: Colors.grey)),
                             child: _imageController.text.isEmpty
-                                ? Text('Image Preview')
+                                ? Text('Previzualizeaza imagine')
                                 : FittedBox(
                                     child: Image.network(_imageController.text),
                                     fit: BoxFit.contain,
@@ -220,22 +220,23 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           Expanded(
                             child: TextFormField(
                               decoration:
-                                  InputDecoration(labelText: 'Image URL'),
+                                  InputDecoration(labelText: 'Link imagine'),
                               keyboardType: TextInputType.url,
                               textInputAction: TextInputAction.done,
                               controller: _imageController,
                               focusNode: _imageFocusNode,
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return 'Please enter an image URL.';
+                                  return 'Adauga link imagine';
                                 }
                                 if (!value.startsWith('http') &&
                                     !value.startsWith('https')) {
-                                  return 'Please enter a valid URL';
+                                  return 'Adauga un link valid';
                                 }
                                 if (!value.endsWith('.jpg') &&
+                                    !value.endsWith('.jpeg') &&
                                     !value.endsWith('.png')) {
-                                  return 'Only accepted formats are jpg and png';
+                                  return 'Formatul trebuie sa fie .jpg .jpeg .png';
                                 }
                                 return null;
                               },

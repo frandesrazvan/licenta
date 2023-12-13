@@ -34,8 +34,11 @@ class ProductItem extends StatelessWidget {
         header: Text(
           product.title,
           textAlign: TextAlign.center,
-          style:
-              TextStyle(color: Colors.white, backgroundColor: Colors.black38),
+          style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+              backgroundColor: Colors.black38),
         ),
         footer: GridTileBar(
           backgroundColor: Colors.black87,
@@ -49,7 +52,7 @@ class ProductItem extends StatelessWidget {
             color: Theme.of(context).colorScheme.primary,
           ),
           title: Text(
-            '\$${product.price}',
+            '${product.price} RON',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 10),
           ),
@@ -59,10 +62,10 @@ class ProductItem extends StatelessWidget {
               cart.addItem(product.id as String, product.price, product.title);
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text('Added item to cart!'),
+                content: Text('Produs adaugat in cos!'),
                 duration: Duration(seconds: 2),
                 action: SnackBarAction(
-                  label: 'UNDO',
+                  label: 'ANULARE',
                   textColor: Theme.of(context).colorScheme.primary,
                   onPressed: () {
                     cart.removeOneItem(product.id as String);

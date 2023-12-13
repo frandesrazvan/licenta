@@ -1,0 +1,332 @@
+@startuml test
+set namespaceSeparator ::
+
+class "flutter_complete_guide::main.dart::MyShopApp" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_complete_guide::main.dart::MyShopApp"
+
+class "flutter_complete_guide::models::http_exception.dart::HttpException" {
+  +String message
+  +String toString()
+}
+
+"dart::core::Exception" <|-- "flutter_complete_guide::models::http_exception.dart::HttpException"
+
+class "flutter_complete_guide::providers::authentication.dart::Authentication" {
+  -String? _token
+  -DateTime? _expiryDate
+  -String? _userId
+  -Timer? _authenticationTimer
+  +bool isAuthenticated
+  +String? token
+  +String? userId
+  -dynamic _authenticate()
+  +dynamic signUp()
+  +dynamic login()
+  +dynamic tryAutoLogin()
+  +dynamic logout()
+  -void _autoLogout()
+}
+
+"flutter_complete_guide::providers::authentication.dart::Authentication" o-- "dart::async::Timer"
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "flutter_complete_guide::providers::authentication.dart::Authentication"
+
+class "flutter_complete_guide::providers::cart.dart::CartItem" {
+  +String id
+  +String title
+  +int quantity
+  +double price
+}
+
+class "flutter_complete_guide::providers::cart.dart::Cart" {
+  -Map<String, CartItem> _items
+  +Map<String, CartItem> items
+  +int itemCount
+  +double totalValue
+  +void addItem()
+  +void removeItem()
+  +void removeOneItem()
+  +void emptyCart()
+}
+
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "flutter_complete_guide::providers::cart.dart::Cart"
+
+class "flutter_complete_guide::providers::orders.dart::OrderItem" {
+  +String id
+  +double amount
+  +List<CartItem> products
+  +DateTime dateTime
+}
+
+class "flutter_complete_guide::providers::orders.dart::Orders" {
+  -List<OrderItem> _orders
+  +String? authToken
+  +String? userId
+  +List<OrderItem> orders
+  +dynamic getOrders()
+  +dynamic addOrder()
+}
+
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "flutter_complete_guide::providers::orders.dart::Orders"
+
+class "flutter_complete_guide::providers::product.dart::Product" {
+  +String? id
+  +String title
+  +String description
+  +double price
+  +String image
+  +bool isFavorite
+  -void _setFavoriteValue()
+  +dynamic toggleFavoriteStatus()
+}
+
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "flutter_complete_guide::providers::product.dart::Product"
+
+class "flutter_complete_guide::providers::products_provider.dart::ProductsProvider" {
+  -List<Product> _items
+  +String? authToken
+  +String? userId
+  +List<Product> items
+  +List<Product> favoriteItems
+  +Product findById()
+  +dynamic getProducts()
+  +dynamic addProduct()
+  +dynamic updateProduct()
+  +dynamic deleteProduct()
+}
+
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "flutter_complete_guide::providers::products_provider.dart::ProductsProvider"
+
+class "flutter_complete_guide::screens::authentication_screen.dart::AuthScreen" {
+  {static} +String routeName
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_complete_guide::screens::authentication_screen.dart::AuthScreen"
+
+class "flutter_complete_guide::screens::authentication_screen.dart::AuthenticationCard" {
+  +_AuthenticationCardState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_complete_guide::screens::authentication_screen.dart::AuthenticationCard"
+
+class "flutter_complete_guide::screens::authentication_screen.dart::_AuthenticationCardState" {
+  -GlobalKey<FormState> _formKey
+  -AuthenticationMode _authenticationMode
+  -Map<String, String> _authData
+  -bool _isLoading
+  -TextEditingController _passwordController
+  -AnimationController? _controller
+  -Animation<Offset>? _slideAnimation
+  -Animation<double>? _opacityAnimation
+  +void initState()
+  +void dispose()
+  -void _showErrorDialog()
+  -dynamic _submit()
+  -void _switchAuthenticationMode()
+  +Widget build()
+}
+
+"flutter_complete_guide::screens::authentication_screen.dart::_AuthenticationCardState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"flutter_complete_guide::screens::authentication_screen.dart::_AuthenticationCardState" o-- "flutter_complete_guide::screens::authentication_screen.dart::AuthenticationMode"
+"flutter_complete_guide::screens::authentication_screen.dart::_AuthenticationCardState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter_complete_guide::screens::authentication_screen.dart::_AuthenticationCardState" o-- "flutter::src::animation::animation_controller.dart::AnimationController"
+"flutter_complete_guide::screens::authentication_screen.dart::_AuthenticationCardState" o-- "flutter::src::animation::animation.dart::Animation<Offset>"
+"flutter_complete_guide::screens::authentication_screen.dart::_AuthenticationCardState" o-- "flutter::src::animation::animation.dart::Animation<double>"
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_complete_guide::screens::authentication_screen.dart::_AuthenticationCardState"
+"flutter::src::widgets::ticker_provider.dart::SingleTickerProviderStateMixin" <|-- "flutter_complete_guide::screens::authentication_screen.dart::_AuthenticationCardState"
+
+class "flutter_complete_guide::screens::authentication_screen.dart::AuthenticationMode" {
+  +int index
+  {static} +List<AuthenticationMode> values
+  {static} +AuthenticationMode SignUp
+  {static} +AuthenticationMode Login
+}
+
+"flutter_complete_guide::screens::authentication_screen.dart::AuthenticationMode" o-- "flutter_complete_guide::screens::authentication_screen.dart::AuthenticationMode"
+"dart::core::Enum" <|-- "flutter_complete_guide::screens::authentication_screen.dart::AuthenticationMode"
+
+class "flutter_complete_guide::screens::cart_screen.dart::CartScreen" {
+  {static} +String routeName
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_complete_guide::screens::cart_screen.dart::CartScreen"
+
+class "flutter_complete_guide::screens::cart_screen.dart::OrderButton" {
+  +Cart cart
+  +State<OrderButton> createState()
+}
+
+"flutter_complete_guide::screens::cart_screen.dart::OrderButton" o-- "flutter_complete_guide::providers::cart.dart::Cart"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_complete_guide::screens::cart_screen.dart::OrderButton"
+
+class "flutter_complete_guide::screens::cart_screen.dart::_OrderButtonState" {
+  -bool _isLoading
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_complete_guide::screens::cart_screen.dart::_OrderButtonState"
+
+class "flutter_complete_guide::screens::edit_product_screen.dart::EditProductScreen" {
+  {static} +String routeName
+  +State<EditProductScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_complete_guide::screens::edit_product_screen.dart::EditProductScreen"
+
+class "flutter_complete_guide::screens::edit_product_screen.dart::_EditProductScreenState" {
+  -TextEditingController _imageController
+  -FocusNode _imageFocusNode
+  -GlobalKey<FormState> _form
+  -Product _editedProduct
+  -Map<String, String> _initValues
+  -bool _isInit
+  -bool _isLoading
+  +void initState()
+  +void didChangeDependencies()
+  +void dispose()
+  -void _updateimage()
+  -dynamic _saveForm()
+  +Widget build()
+}
+
+"flutter_complete_guide::screens::edit_product_screen.dart::_EditProductScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter_complete_guide::screens::edit_product_screen.dart::_EditProductScreenState" o-- "flutter::src::widgets::focus_manager.dart::FocusNode"
+"flutter_complete_guide::screens::edit_product_screen.dart::_EditProductScreenState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"flutter_complete_guide::screens::edit_product_screen.dart::_EditProductScreenState" o-- "flutter_complete_guide::providers::product.dart::Product"
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_complete_guide::screens::edit_product_screen.dart::_EditProductScreenState"
+
+class "flutter_complete_guide::screens::loading_screen.dart::LoadingScreen" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_complete_guide::screens::loading_screen.dart::LoadingScreen"
+
+class "flutter_complete_guide::screens::orders_screen.dart::OrdersScreen" {
+  {static} +String routeName
+  +State<OrdersScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_complete_guide::screens::orders_screen.dart::OrdersScreen"
+
+class "flutter_complete_guide::screens::orders_screen.dart::_OrdersScreenState" {
+  -dynamic _ordersFuture
+  -dynamic _obtainOrdersFuture()
+  +void initState()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_complete_guide::screens::orders_screen.dart::_OrdersScreenState"
+
+class "flutter_complete_guide::screens::products_overview_screen.dart::ProductOverviewScreen" {
+  +State<ProductOverviewScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_complete_guide::screens::products_overview_screen.dart::ProductOverviewScreen"
+
+class "flutter_complete_guide::screens::products_overview_screen.dart::_ProductOverviewScreenState" {
+  -bool _showOnlyFavorites
+  -bool _isInit
+  -bool _isLoading
+  +void initState()
+  +void didChangeDependencies()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_complete_guide::screens::products_overview_screen.dart::_ProductOverviewScreenState"
+
+class "flutter_complete_guide::screens::products_overview_screen.dart::FliterOptions" {
+  +int index
+  {static} +List<FliterOptions> values
+  {static} +FliterOptions Favorites
+  {static} +FliterOptions All
+}
+
+"flutter_complete_guide::screens::products_overview_screen.dart::FliterOptions" o-- "flutter_complete_guide::screens::products_overview_screen.dart::FliterOptions"
+"dart::core::Enum" <|-- "flutter_complete_guide::screens::products_overview_screen.dart::FliterOptions"
+
+class "flutter_complete_guide::screens::product_detail_screen.dart::ProductDetailScreen" {
+  {static} +String routeName
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_complete_guide::screens::product_detail_screen.dart::ProductDetailScreen"
+
+class "flutter_complete_guide::screens::user_products_screen.dart::UserProductsScreen" {
+  {static} +String routeName
+  -dynamic _refreshProducts()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_complete_guide::screens::user_products_screen.dart::UserProductsScreen"
+
+class "flutter_complete_guide::widgets::badge.dart::BadgeIcon" {
+  +Widget child
+  +int value
+  +Color? color
+  +Widget build()
+}
+
+"flutter_complete_guide::widgets::badge.dart::BadgeIcon" o-- "flutter::src::widgets::framework.dart::Widget"
+"flutter_complete_guide::widgets::badge.dart::BadgeIcon" o-- "dart::ui::Color"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_complete_guide::widgets::badge.dart::BadgeIcon"
+
+class "flutter_complete_guide::widgets::cart_item.dart::CartItem" {
+  +String id
+  +String prodId
+  +double price
+  +int quantity
+  +String title
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_complete_guide::widgets::cart_item.dart::CartItem"
+
+class "flutter_complete_guide::widgets::drawer.dart::AppDrawer" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_complete_guide::widgets::drawer.dart::AppDrawer"
+
+class "flutter_complete_guide::widgets::order_item.dart::OrderItem" {
+  +OrderItem order
+  +State<OrderItem> createState()
+}
+
+"flutter_complete_guide::widgets::order_item.dart::OrderItem" o-- "flutter_complete_guide::providers::orders.dart::OrderItem"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_complete_guide::widgets::order_item.dart::OrderItem"
+
+class "flutter_complete_guide::widgets::order_item.dart::_OrderItemState" {
+  -bool _expanded
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_complete_guide::widgets::order_item.dart::_OrderItemState"
+
+class "flutter_complete_guide::widgets::products_table.dart::ProductsTable" {
+  +bool showFavorites
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_complete_guide::widgets::products_table.dart::ProductsTable"
+
+class "flutter_complete_guide::widgets::product_item.dart::ProductItem" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_complete_guide::widgets::product_item.dart::ProductItem"
+
+class "flutter_complete_guide::widgets::user_product_item.dart::UserProductItem" {
+  +String id
+  +String title
+  +String image
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_complete_guide::widgets::user_product_item.dart::UserProductItem"
+
+
+@enduml

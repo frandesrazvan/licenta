@@ -38,7 +38,7 @@ class UserProductItem extends StatelessWidget {
                 } catch (error) {
                   scaffold.showSnackBar(SnackBar(
                       content: Text(
-                    'Deleting failed!',
+                    'Stergerea a esuat!',
                     textAlign: TextAlign.center,
                   )));
                 }

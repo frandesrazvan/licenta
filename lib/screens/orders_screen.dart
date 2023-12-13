@@ -31,7 +31,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Your Orders')),
+        appBar: AppBar(title: Text('Comenzile tale')),
         drawer: AppDrawer(),
         body: FutureBuilder(
           future: _ordersFuture,
@@ -43,7 +43,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
             } else {
               if (dataSnapshot.error != null) {
                 return Center(
-                    child: Text('Nothing to display, try placing an order.'));
+                    child: Text(
+                        'Nimic de afisat, incearca sa plasezi o comanda.'));
               } else {
                 return Consumer<Orders>(
                     builder: (context, orderData, child) => ListView.builder(

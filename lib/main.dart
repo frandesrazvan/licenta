@@ -45,7 +45,7 @@ class MyShopApp extends StatelessWidget {
         child: Consumer<Authentication>(
           builder: (context, authenticationData, _) => MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'MSA Flutter',
+            title: 'Magazin Engross',
             theme: ThemeData(
               primarySwatch: Colors.orange,
               fontFamily: 'Lato',

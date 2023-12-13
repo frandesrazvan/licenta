@@ -10,11 +10,12 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Column(children: [
-        AppBar(title: Text('MSA Flutter'), automaticallyImplyLeading: false),
+        AppBar(
+            title: Text('Magazin Engross'), automaticallyImplyLeading: false),
         Divider(),
         ListTile(
           leading: Icon(Icons.shop),
-          title: Text('Shop'),
+          title: Text('Magazin'),
           onTap: () {
             Navigator.of(context).pushReplacementNamed('/');
           },
@@ -22,7 +23,7 @@ class AppDrawer extends StatelessWidget {
         Divider(),
         ListTile(
           leading: Icon(Icons.payment),
-          title: Text('Orders'),
+          title: Text('Comenzi'),
           onTap: () {
             Navigator.of(context).pushReplacementNamed(OrdersScreen.routeName);
           },
@@ -30,7 +31,7 @@ class AppDrawer extends StatelessWidget {
         Divider(),
         ListTile(
           leading: Icon(Icons.edit),
-          title: Text('Manage Products'),
+          title: Text('Gestioneaza produse'),
           onTap: () {
             Navigator.of(context)
                 .pushReplacementNamed(UserProductsScreen.routeName);
@@ -39,7 +40,7 @@ class AppDrawer extends StatelessWidget {
         Divider(),
         ListTile(
           leading: Icon(Icons.exit_to_app),
-          title: Text('Logout'),
+          title: Text('Deconectare'),
           onTap: () {
             Navigator.of(context).pop();
             Provider.of<Authentication>(context, listen: false).logout();

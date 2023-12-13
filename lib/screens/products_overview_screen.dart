@@ -49,17 +49,17 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('MSA Flutter'),
+        title: const Text('Magazin Engross'),
         actions: [
           PopupMenuButton(
             icon: Icon(Icons.more_vert),
             itemBuilder: (_) => [
               PopupMenuItem(
-                child: Text('Only Favorites'),
+                child: Text('Afiseaza doar favorite'),
                 value: FliterOptions.Favorites,
               ),
               PopupMenuItem(
-                child: Text('Show All'),
+                child: Text('Afiseaza toate produsele'),
                 value: FliterOptions.All,
               )
             ],

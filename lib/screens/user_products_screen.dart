@@ -18,7 +18,7 @@ class UserProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Products'),
+        title: const Text('Produsele tale'),
         actions: [
           IconButton(
               onPressed: () {
