@@ -28,7 +28,8 @@ class ProductsProvider with ChangeNotifier {
   Future<void> getProducts([bool filterByUser = false]) async {
     final filterString = filterByUser ? 'equalTo="$userId"' : '';
     var url =
-        'https://first-flutter-project-5ba85-default-rtdb.firebaseio.com/products.json?auth=$authToken&orderBy="creatorId"&$filterString';
+        'https://first-flutter-project-5ba85-default-rtdb.firebaseio.com/' +
+            'products.json?auth=$authToken&orderBy="creatorId"&$filterString';
     try {
       final response = await http.get(Uri.parse(url));
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -38,8 +39,8 @@ class ProductsProvider with ChangeNotifier {
         return;
       }
 
-      url =
-          'https://first-flutter-project-5ba85-default-rtdb.firebaseio.com/userFavorites/$userId.json?auth=$authToken';
+      url = 'https://first-flutter-project-5ba85-default-rtdb.firebaseio.com/' +
+          'userFavorites/$userId.json?auth=$authToken';
       final favoriteResponse = await http.get(Uri.parse(url));
       final favoriteData = json.decode(favoriteResponse.body);
 

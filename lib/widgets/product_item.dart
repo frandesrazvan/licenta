@@ -37,45 +37,91 @@ class ProductItem extends StatelessWidget {
           style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
-              fontSize: 15,
+              fontSize: 25,
               backgroundColor: Colors.black38),
         ),
-        footer: GridTileBar(
-          backgroundColor: Colors.black87,
-          leading: IconButton(
-            icon: Icon(
-                product.isFavorite ? Icons.favorite : Icons.favorite_border),
-            onPressed: () {
-              product.toggleFavoriteStatus(authenticationData.token as String,
-                  authenticationData.userId as String);
-            },
-            color: Theme.of(context).colorScheme.primary,
-          ),
-          title: Text(
-            '${product.price} RON',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 10),
-          ),
-          trailing: IconButton(
-            icon: Icon(Icons.shopping_cart),
-            onPressed: () {
-              cart.addItem(product.id as String, product.price, product.title);
-              ScaffoldMessenger.of(context).hideCurrentSnackBar();
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text('Produs adaugat in cos!'),
-                duration: Duration(seconds: 2),
-                action: SnackBarAction(
-                  label: 'ANULARE',
-                  textColor: Theme.of(context).colorScheme.primary,
-                  onPressed: () {
-                    cart.removeOneItem(product.id as String);
-                  },
+        footer: MediaQuery.of(context).size.width < 390
+            ? Container(
+                height: 70,
+                child: GridTileBar(
+                  backgroundColor: Colors.black87,
+                  leading: IconButton(
+                    icon: Icon(product.isFavorite
+                        ? Icons.favorite
+                        : Icons.favorite_border),
+                    onPressed: () {
+                      product.toggleFavoriteStatus(
+                          authenticationData.token as String,
+                          authenticationData.userId as String);
+                    },
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  title: Text(
+                    '${product.price} Lei',
+                    //textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 8),
+                  ),
+                  trailing: IconButton(
+                    icon: Icon(Icons.shopping_cart),
+                    onPressed: () {
+                      cart.addItem(
+                          product.id as String, product.price, product.title);
+                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Produs adaugat in cos!'),
+                        duration: Duration(seconds: 2),
+                        action: SnackBarAction(
+                          label: 'ANULARE',
+                          textColor: Theme.of(context).colorScheme.primary,
+                          onPressed: () {
+                            cart.removeOneItem(product.id as String);
+                          },
+                        ),
+                      ));
+                    },
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
-              ));
-            },
-            color: Theme.of(context).colorScheme.primary,
-          ),
-        ),
+              )
+            : GridTileBar(
+                backgroundColor: Colors.black87,
+                leading: IconButton(
+                  icon: Icon(product.isFavorite
+                      ? Icons.favorite
+                      : Icons.favorite_border),
+                  onPressed: () {
+                    product.toggleFavoriteStatus(
+                        authenticationData.token as String,
+                        authenticationData.userId as String);
+                  },
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                title: Text(
+                  '${product.price} Lei',
+                  //textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 8),
+                ),
+                trailing: IconButton(
+                  icon: Icon(Icons.shopping_cart),
+                  onPressed: () {
+                    cart.addItem(
+                        product.id as String, product.price, product.title);
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Produs adaugat in cos!'),
+                      duration: Duration(seconds: 2),
+                      action: SnackBarAction(
+                        label: 'ANULARE',
+                        textColor: Theme.of(context).colorScheme.primary,
+                        onPressed: () {
+                          cart.removeOneItem(product.id as String);
+                        },
+                      ),
+                    ));
+                  },
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
       ),
     );
   }

@@ -42,7 +42,7 @@ class AuthScreen extends StatelessWidget {
                     child: Container(
                       margin: const EdgeInsets.only(bottom: 20.0),
                       padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 94.0),
+                          vertical: 8.0, horizontal: 75.0),
                       transform: Matrix4.rotationZ(-8 * pi / 180)
                         ..translate(-10.0),
                       // ..translate(-10.0),
@@ -59,9 +59,10 @@ class AuthScreen extends StatelessWidget {
                       ),
                       child: Text(
                         'Magazin Engross',
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
-                          fontSize: 30,
+                          fontSize: 23,
                           fontFamily: 'Anton',
                           fontWeight: FontWeight.normal,
                         ),
@@ -313,7 +314,7 @@ class _AuthenticationCardState extends State<AuthenticationCard>
                     ),
                   TextButton(
                     child: Text(
-                        '${_authenticationMode == AuthenticationMode.Login ? 'N-ai cont? Inregistreaza-te' : 'Ai cont? Logheaza-te'}'),
+                        '${_authenticationMode == AuthenticationMode.Login ? 'Inregistreaza-te' : 'Ai cont? Autentifica-te'}'),
                     onPressed: _switchAuthenticationMode,
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.symmetric(

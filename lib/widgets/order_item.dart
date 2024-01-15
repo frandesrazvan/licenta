@@ -45,11 +45,19 @@ class _OrderItemState extends State<OrderItem> {
                           children: [
                             Text(prod.title,
                                 style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold)),
+                                    fontSize:
+                                        MediaQuery.of(context).size.width < 390
+                                            ? 15
+                                            : 13,
+                                    fontWeight: FontWeight.bold)),
                             Text(
-                              '${prod.quantity} x ${prod.price} RON',
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.grey),
+                              '${prod.quantity} x ${prod.price}',
+                              style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.width < 390
+                                          ? 20
+                                          : 18,
+                                  color: Colors.grey),
                             )
                           ],
                         ))

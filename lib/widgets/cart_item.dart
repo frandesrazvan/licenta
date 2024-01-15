@@ -61,7 +61,7 @@ class CartItem extends StatelessWidget {
                 foregroundColor: Colors.white,
                 child: Padding(
                     padding: EdgeInsets.all(4),
-                    child: FittedBox(child: Text('\$${price}')))),
+                    child: FittedBox(child: Text('${price}')))),
             title: Text(title),
             subtitle: Text('Total: ${(price * quantity)} RON'),
             trailing: Text('x $quantity'),

@@ -27,7 +27,7 @@ class CartScreen extends StatelessWidget {
                 children: [
                   Text(
                     'Valoare totala',
-                    style: TextStyle(fontSize: 17),
+                    style: TextStyle(fontSize: 13),
                   ),
                   Spacer(),
                   Chip(
@@ -98,7 +98,8 @@ class _OrderButtonState extends State<OrderButton> {
       child: _isLoading
           ? CircularProgressIndicator()
           : Text(
-              'COMANDA ACUM',
+              'COMANDA',
+              style: TextStyle(fontSize: 12),
             ),
       style: TextButton.styleFrom(
         foregroundColor: Theme.of(context).primaryColor,
